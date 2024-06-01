@@ -6,6 +6,7 @@ from tkinter import PhotoImage
 from tkinter import ttk
 from PIL import Image, ImageTk
 import datetime as dt
+import csv
 
 ctk.set_appearance_mode("light")
 
@@ -75,10 +76,25 @@ def condiciones_registro(ventana_registro, entry_nombre, entry_apellido, combo_g
         messagebox.showerror("Error","Por favor ingrese datos válidos")
         
     guardar_datos(entry_nombre, entry_apellido, combo_genero, entry_nacionalidad, entry_documento, entry_fecha_nacimiento, entry_correo, entry_numero_telefono,valor_seleccionado)
-    messagebox.showinfo("informacion","Datos guardados exitosamente")  
+  
 
 def guardar_datos(entry_nombre, entry_apellido, combo_genero, entry_nacionalidad, entry_documento, entry_fecha_nacimiento, entry_correo, entry_numero_telefono,valor_seleccionado):
-    open("datos_usuarios.csv", "a").write(f"\n{entry_nombre.get()},{entry_apellido.get()},{combo_genero.get()},{entry_nacionalidad.get()},{entry_documento.get()},{entry_fecha_nacimiento.get()},{entry_correo.get()},{entry_numero_telefono.get()},{valor_seleccionado.get()}\n")    
+    documento = entry_documento.get()
+    
+    # Leer el archivo CSV y verificar si el documento ya existe
+    with open("datos_usuarios.csv", "r") as f:
+        reader = csv.reader(f)
+        for row in reader:
+            if row and len(row) >= 5 and row[4] == documento:  # Si el documento ya existe, mostrar un mensaje de error y salir de la función
+                messagebox.showerror("Error", "El documento ya existe en la base de datos")
+                return
+            
+    messagebox.showinfo("informacion","Datos guardados exitosamente")
+    
+    # Si el documento no existe, agregar el nuevo registro
+    with open("datos_usuarios.csv", "a") as f:
+        f.write(f"\n{entry_nombre.get()},{entry_apellido.get()},{combo_genero.get()},{entry_nacionalidad.get()},{documento},{entry_fecha_nacimiento.get()},{entry_correo.get()},{entry_numero_telefono.get()},{valor_seleccionado.get()}\n")
+
     
     
 def ventanaregistro():
@@ -110,7 +126,6 @@ def ventanaregistro():
     entry_numero_telefono = ctk.CTkEntry(ventana_registro, font=("Arial", 15),border_color="purple")
     label_asistencia = ctk.CTkLabel(ventana_registro, text="¿Necesitas asistencia especial?", font=("Arial", 15))
     
-    
     boton_enviar= ctk.CTkButton(ventana_registro,text="Enviar Datos", font=("arial",15),fg_color="purple",corner_radius=32,hover_color="purple4",command= lambda: condiciones_registro(ventana_registro, entry_nombre, entry_apellido, combo_genero, entry_nacionalidad, entry_documento, entry_fecha_nacimiento, entry_correo, entry_numero_telefono,valor_seleccionado))
     
     label_titulo.place(x=620, y=40)
@@ -137,8 +152,8 @@ def ventanaregistro():
     valor_seleccionado = tk.StringVar()
 
     # Crea los botones de radio
-    radio1 = ctk.CTkRadioButton(ventana_registro, text="SI",fg_color="purple" ,variable=valor_seleccionado, value="si")
-    radio2 = ctk.CTkRadioButton(ventana_registro, text="NO",fg_color="purple" ,variable=valor_seleccionado, value="no")
+    radio1 = ctk.CTkRadioButton(ventana_registro, text="SI",fg_color="purple" ,variable=valor_seleccionado, value="SI")
+    radio2 = ctk.CTkRadioButton(ventana_registro, text="NO",fg_color="purple" ,variable=valor_seleccionado, value="NO")
 
     # Posiciona los botones de radio
     radio1.place(x=650,y=410)
