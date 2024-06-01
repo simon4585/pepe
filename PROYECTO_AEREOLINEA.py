@@ -12,10 +12,6 @@ ctk.set_appearance_mode("light")
 
 
 
-
-
-
-
 def comprar_tiquete():
     ventana_inicio.destroy()
     ventana_compra = ctk.CTk()
@@ -78,23 +74,8 @@ def condiciones_registro(ventana_registro, entry_nombre, entry_apellido, combo_g
     except ValueError:
         messagebox.showerror("Error","Por favor ingrese datos válidos")
     
-    # if entry_nombre.get()=="" or entry_apellido.get()=="" or combo_genero.get()=="" or entry_nacionalidad.get()=="" or entry_documento.get()=="" or entry_fecha_nacimiento.get()=="" or entry_correo.get()=="" or entry_numero_telefono.get()=="" or combo_asistencia.get()=="":
-    #     ctk.messagebox.showerror("Error", "Por favor llena todos los campos")
-        
-    # elif entry_nombre.get()== int or entry_apellido.get()== int or entry_nacionalidad.get()== int :
-    #     ctk.messagebox.showerror("Error","Por fabor ingrese datos validos")
-        
-    # elif entry_documento.get()== str or entry_numero_telefono.get()== str: 
-    #     ctk.messagebox.showerror("Error","Por favor ingrese datos validos")
-        
-# try:
-#         # Intenta convertir la fecha a un objeto datetime
-#         datetime.datetime.strptime(birthday, '%d/%m/%Y')
-#     except ValueError:
-#         # Si la conversión falla, muestra un mensaje de error
-#         mb.showerror("Error", "La fecha debe tener el formato dd/mm/aaaa")
-#         return
-
+    
+    
 def ventanaregistro():
     ventana_inicio.destroy()
     ventana_registro = ctk.CTk()
@@ -158,37 +139,37 @@ def ventanaregistro():
 
 
 
-
-
-
 ventana_inicio = ctk.CTk()
 ventana_inicio.title("Aerolinea Stellar Airways")
-ventana_inicio.geometry("500x500")
+ventana_inicio.geometry("700x500")
 
 label_titulo = ctk.CTkLabel(ventana_inicio, text="Stellar Airways", font=("Arial", 20),text_color="purple")
 
 #se colocal la imagen del logo
-label_logo= Image.open("logoaerolinea-removebg-preview.png")
-label_logo=label_logo.resize((200,200))
+label_logo= Image.open("logoNuevo.png")
+label_logo=label_logo.resize((410,625))
 photo=ImageTk.PhotoImage(label_logo)
 label_logo=tk.Label(ventana_inicio, image=photo)
 label_logo.image=photo
 
+#se crea un frame para los botones
+frame_botones = ctk.CTkFrame(ventana_inicio,fg_color="white",corner_radius=32,width=300, height=400, border_color="purple",border_width=3)
+frame_botones.place(x=360, y=70)
 
-boton_registro = ctk.CTkButton(ventana_inicio, text="Registro",fg_color="purple" ,corner_radius=32,command=ventanaregistro)
-boton_comprar = ctk.CTkButton(ventana_inicio, text="Comprar tiquete",fg_color="purple",corner_radius=32,command=comprar_tiquete)
-boton_checkin = ctk.CTkButton(ventana_inicio, text="Realizar Check-in",fg_color="purple",corner_radius=32)
-boton_ver_vuelos = ctk.CTkButton(ventana_inicio, text="Ver nuestros vuelos disponibles",fg_color="purple",corner_radius=32)
+
+#se crean los botones
+boton_registro = ctk.CTkButton(frame_botones, text="Registro",fg_color="purple" ,border_color="black",border_width=2,corner_radius=32,command=ventanaregistro)
+boton_comprar = ctk.CTkButton(frame_botones, text="Comprar tiquete",fg_color="purple",border_color="black",border_width=2,corner_radius=32,command=comprar_tiquete)
+boton_checkin = ctk.CTkButton(frame_botones, text="Realizar Check-in",fg_color="purple",border_color="black",border_width=2,corner_radius=32)
+boton_ver_vuelos = ctk.CTkButton(frame_botones, text="Vuelos disponibles",fg_color="purple",border_color="black",border_width=2,corner_radius=32)
 
 #posicion de los elementos
-label_titulo.place(x=200, y=50)
-label_logo.place(x=230, y=120)
-boton_registro.place(x=200, y=300)
-boton_comprar.place(x=200, y=350)
-boton_checkin.place(x=200, y=400)
-boton_ver_vuelos.place(x=165, y=450)
-
-
+label_titulo.place(x=440, y=10)
+label_logo.place(x=0, y=0)
+boton_registro.place(x=80, y=70)
+boton_comprar.place(x=80, y=140)
+boton_checkin.place(x=80, y=210)
+boton_ver_vuelos.place(x=80, y=280)
 
 
 ventana_inicio.mainloop()
