@@ -80,11 +80,15 @@ def ventanaregistro():
     ventana_inicio.destroy()
     ventana_registro = ctk.CTk()
     ventana_registro.title("Registro")
-    ventana_registro.geometry("1200x1200+250+80")
+    #poner la ventana en pantalla completa
+    ventana_registro.geometry("1800x800+0+0")
     
     
-    label_titulo = ctk.CTkLabel(ventana_registro, text="Registro en Stellar Airways", font=("Arial", 20))
-    label_texto = ctk.CTkLabel(ventana_registro, text="Por favor ingresa tus datos", font=("Arial", 15))
+    
+    
+    
+    label_titulo = ctk.CTkLabel(ventana_registro, text="Registro en Stellar Airways", font=("Eras Demi ITC", 20),text_color="purple")
+    label_texto = ctk.CTkLabel(ventana_registro, text="Por favor ingresa tus datos", font=("Eras Demi ITC", 15))
     label_nombre = ctk.CTkLabel(ventana_registro, text="Primer nombre:", font=("Arial", 15))
     entry_nombre = ctk.CTkEntry(ventana_registro, font=("Arial", 15),border_color="purple",border_width=2)
     label_apellido = ctk.CTkLabel(ventana_registro, text="Primer apellido:", font=("Arial", 15))
@@ -106,27 +110,31 @@ def ventanaregistro():
     
     boton_enviar= ctk.CTkButton(ventana_registro,text="Enviar Datos", font=("arial",15),fg_color="purple",corner_radius=32, command= lambda: condiciones_registro(ventana_registro, entry_nombre, entry_apellido, combo_genero, entry_nacionalidad, entry_documento, entry_fecha_nacimiento, entry_correo, entry_numero_telefono, combo_asistencia))
     
-    label_titulo.place(relx=0.5, rely=0.1, anchor="center")
-    label_texto.place(relx=0.5, rely=0.2, anchor="center")
-    label_nombre.place(relx=0.1, rely=0.3, anchor="center")
-    entry_nombre.place(relx=0.3, rely=0.3, anchor="center")
-    label_apellido.place(relx=0.1, rely=0.4, anchor="center")
-    entry_apellido.place(relx=0.3, rely=0.4, anchor="center")
-    label_genero.place(relx=0.1, rely=0.5, anchor="center")
-    combo_genero.place(relx=0.3, rely=0.5, anchor="center")
-    label_nacionalidad.place(relx=0.1, rely=0.6, anchor="center")
-    entry_nacionalidad.place(relx=0.3, rely=0.6, anchor="center")
-    numero_documento.place(relx=0.6, rely=0.6, anchor="center")
-    entry_documento.place(relx=0.9, rely=0.6, anchor="center")
-    label_fecha_nacimiento.place(relx=0.6, rely=0.3, anchor="center")
-    entry_fecha_nacimiento.place(relx=0.9, rely=0.3, anchor="center")
-    label_correo.place(relx=0.6, rely=0.4, anchor="center")
-    entry_correo.place(relx=0.9, rely=0.4, anchor="center")
-    label_numero_telefono.place(relx=0.6, rely=0.5, anchor="center")
-    entry_numero_telefono.place(relx=0.9, rely=0.5, anchor="center")
-    label_asistencia.place(relx=0.5, rely=0.7, anchor="center")
-    combo_asistencia.place(relx=0.5, rely=0.8, anchor="center")
-    boton_enviar.place(relx=0.5,rely=0.85,anchor= "center")
+    label_titulo.place(x=640, y=40)
+    label_texto.place(x=670, y=80)
+    
+    label_nombre.place(x=300, y=150)
+    entry_nombre.place(x=500, y=150)
+    label_apellido.place(x=300, y=200)
+    entry_apellido.place(x=500, y= 200)
+    label_genero.place(x=300, y=250)
+    combo_genero.place(x=500, y=250)
+    label_nacionalidad.place(x=300, y=300)
+    entry_nacionalidad.place(x=500, y=300)
+    
+    numero_documento.place(x=800, y=150)
+    entry_documento.place(x=1000, y=150)
+    label_fecha_nacimiento.place(x=800, y=200)
+    entry_fecha_nacimiento.place(x=1000, y=200)
+    label_correo.place(x=800, y=250)
+    entry_correo.place(x=1000, y=250)
+    label_numero_telefono.place(x=800, y=300)
+    entry_numero_telefono.place(x=1000, y=300)
+    
+    label_asistencia.place(x=610, y=360)
+    combo_asistencia.place(x=660, y=410)
+    
+    boton_enviar.place(x=660,y=470)
     
     ventana_registro.mainloop()
 
@@ -141,9 +149,9 @@ def ventanaregistro():
 
 ventana_inicio = ctk.CTk()
 ventana_inicio.title("Aerolinea Stellar Airways")
-ventana_inicio.geometry("700x500")
+ventana_inicio.geometry("700x500+500+220")
 
-label_titulo = ctk.CTkLabel(ventana_inicio, text="Stellar Airways", font=("Arial", 20),text_color="purple")
+label_titulo = ctk.CTkLabel(ventana_inicio, text="Stellar Airways", font=("Eras Demi ITC", 30),text_color="purple")
 
 #se colocal la imagen del logo
 label_logo= Image.open("logoNuevo.png")
@@ -164,7 +172,7 @@ boton_checkin = ctk.CTkButton(frame_botones, text="Realizar Check-in",fg_color="
 boton_ver_vuelos = ctk.CTkButton(frame_botones, text="Vuelos disponibles",fg_color="purple",border_color="black",border_width=2,corner_radius=32)
 
 #posicion de los elementos
-label_titulo.place(x=440, y=10)
+label_titulo.place(x=400, y=20)
 label_logo.place(x=0, y=0)
 boton_registro.place(x=80, y=70)
 boton_comprar.place(x=80, y=140)
