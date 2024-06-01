@@ -49,8 +49,8 @@ def comprar_tiquete():
     
     
 
-def condiciones_registro(ventana_registro, entry_nombre, entry_apellido, combo_genero, entry_nacionalidad, entry_documento, entry_fecha_nacimiento, entry_correo, entry_numero_telefono, combo_asistencia):
-    if entry_nombre.get()=="" or entry_apellido.get()=="" or combo_genero.get()=="" or entry_nacionalidad.get()=="" or entry_documento.get()=="" or entry_fecha_nacimiento.get()=="" or entry_correo.get()=="" or entry_numero_telefono.get()=="" or combo_asistencia.get()=="" :
+def condiciones_registro(ventana_registro, entry_nombre, entry_apellido, combo_genero, entry_nacionalidad, entry_documento, entry_fecha_nacimiento, entry_correo, entry_numero_telefono,valor_seleccionado):
+    if entry_nombre.get()=="" or entry_apellido.get()=="" or combo_genero.get()=="" or entry_nacionalidad.get()=="" or entry_documento.get()=="" or entry_fecha_nacimiento.get()=="" or entry_correo.get()=="" or entry_numero_telefono.get()=="":
         messagebox.showerror("Error","Por favor llena todos los campos")
         
     elif entry_nombre.get().isdigit() or entry_apellido.get().isdigit():
@@ -73,7 +73,12 @@ def condiciones_registro(ventana_registro, entry_nombre, entry_apellido, combo_g
         int(entry_numero_telefono.get())
     except ValueError:
         messagebox.showerror("Error","Por favor ingrese datos válidos")
-    
+        
+    guardar_datos(entry_nombre, entry_apellido, combo_genero, entry_nacionalidad, entry_documento, entry_fecha_nacimiento, entry_correo, entry_numero_telefono,valor_seleccionado)
+    messagebox.showinfo("informacion","Datos guardados exitosamente")  
+
+def guardar_datos(entry_nombre, entry_apellido, combo_genero, entry_nacionalidad, entry_documento, entry_fecha_nacimiento, entry_correo, entry_numero_telefono,valor_seleccionado):
+    open("datos_usuarios.csv", "a").write(f"\n{entry_nombre.get()},{entry_apellido.get()},{combo_genero.get()},{entry_nacionalidad.get()},{entry_documento.get()},{entry_fecha_nacimiento.get()},{entry_correo.get()},{entry_numero_telefono.get()},{valor_seleccionado.get()}\n")    
     
     
 def ventanaregistro():
@@ -85,8 +90,6 @@ def ventanaregistro():
     
     
     
-    
-    
     label_titulo = ctk.CTkLabel(ventana_registro, text="Registro en Stellar Airways", font=("Eras Demi ITC", 20),text_color="purple")
     label_texto = ctk.CTkLabel(ventana_registro, text="Por favor ingresa tus datos", font=("Eras Demi ITC", 15))
     label_nombre = ctk.CTkLabel(ventana_registro, text="Primer nombre:", font=("Arial", 15))
@@ -94,7 +97,7 @@ def ventanaregistro():
     label_apellido = ctk.CTkLabel(ventana_registro, text="Primer apellido:", font=("Arial", 15))
     entry_apellido = ctk.CTkEntry(ventana_registro, font=("Arial", 15),border_color="purple")
     label_genero = ctk.CTkLabel(ventana_registro, text="Genero:", font=("Arial", 15))
-    combo_genero = ctk.CTkComboBox(ventana_registro, values=["Masculino", "Femenino", "Otro"], font=("Arial", 15),border_color="purple")
+    combo_genero = ctk.CTkComboBox(ventana_registro, values=["Masculino", "Femenino", "Otro"], font=("Arial", 15),button_color="purple",border_color="purple",button_hover_color="purple4")
     label_nacionalidad = ctk.CTkLabel(ventana_registro, text="Nacionalidad:", font=("Arial", 15))
     entry_nacionalidad = ctk.CTkEntry(ventana_registro, font=("Arial", 15),border_color="purple")
     numero_documento = ctk.CTkLabel(ventana_registro, text="Numero de documento:", font=("Arial", 15))
@@ -106,12 +109,12 @@ def ventanaregistro():
     label_numero_telefono = ctk.CTkLabel(ventana_registro, text="Numero de telefono:", font=("Arial", 15))
     entry_numero_telefono = ctk.CTkEntry(ventana_registro, font=("Arial", 15),border_color="purple")
     label_asistencia = ctk.CTkLabel(ventana_registro, text="¿Necesitas asistencia especial?", font=("Arial", 15))
-    combo_asistencia = ctk.CTkComboBox(ventana_registro, values=["Si", "No"], font=("Arial", 15),border_color="purple")
     
-    boton_enviar= ctk.CTkButton(ventana_registro,text="Enviar Datos", font=("arial",15),fg_color="purple",corner_radius=32, command= lambda: condiciones_registro(ventana_registro, entry_nombre, entry_apellido, combo_genero, entry_nacionalidad, entry_documento, entry_fecha_nacimiento, entry_correo, entry_numero_telefono, combo_asistencia))
     
-    label_titulo.place(x=640, y=40)
-    label_texto.place(x=670, y=80)
+    boton_enviar= ctk.CTkButton(ventana_registro,text="Enviar Datos", font=("arial",15),fg_color="purple",corner_radius=32,hover_color="purple4",command= lambda: condiciones_registro(ventana_registro, entry_nombre, entry_apellido, combo_genero, entry_nacionalidad, entry_documento, entry_fecha_nacimiento, entry_correo, entry_numero_telefono,valor_seleccionado))
+    
+    label_titulo.place(x=620, y=40)
+    label_texto.place(x=650, y=80)
     
     label_nombre.place(x=300, y=150)
     entry_nombre.place(x=500, y=150)
@@ -131,10 +134,22 @@ def ventanaregistro():
     label_numero_telefono.place(x=800, y=300)
     entry_numero_telefono.place(x=1000, y=300)
     
-    label_asistencia.place(x=610, y=360)
-    combo_asistencia.place(x=660, y=410)
+    valor_seleccionado = tk.StringVar()
+
+    # Crea los botones de radio
+    radio1 = ctk.CTkRadioButton(ventana_registro, text="SI",fg_color="purple" ,variable=valor_seleccionado, value="si")
+    radio2 = ctk.CTkRadioButton(ventana_registro, text="NO",fg_color="purple" ,variable=valor_seleccionado, value="no")
+
+    # Posiciona los botones de radio
+    radio1.place(x=650,y=410)
+    radio2.place(x=730,y=410)
     
-    boton_enviar.place(x=660,y=470)
+    
+    
+    label_asistencia.place(x=610, y=360)
+    
+    
+    boton_enviar.place(x=640,y=470)
     
     ventana_registro.mainloop()
 
@@ -166,10 +181,10 @@ frame_botones.place(x=360, y=70)
 
 
 #se crean los botones
-boton_registro = ctk.CTkButton(frame_botones, text="Registro",fg_color="purple" ,border_color="black",border_width=2,corner_radius=32,command=ventanaregistro)
-boton_comprar = ctk.CTkButton(frame_botones, text="Comprar tiquete",fg_color="purple",border_color="black",border_width=2,corner_radius=32,command=comprar_tiquete)
-boton_checkin = ctk.CTkButton(frame_botones, text="Realizar Check-in",fg_color="purple",border_color="black",border_width=2,corner_radius=32)
-boton_ver_vuelos = ctk.CTkButton(frame_botones, text="Vuelos disponibles",fg_color="purple",border_color="black",border_width=2,corner_radius=32)
+boton_registro = ctk.CTkButton(frame_botones, text="Registro",fg_color="purple" ,border_color="black",border_width=2,corner_radius=32,hover_color="purple4",command=ventanaregistro)
+boton_comprar = ctk.CTkButton(frame_botones, text="Comprar tiquete",fg_color="purple",border_color="black",border_width=2,corner_radius=32,hover_color="purple4",command=comprar_tiquete)
+boton_checkin = ctk.CTkButton(frame_botones, text="Realizar Check-in",fg_color="purple",border_color="black",border_width=2,corner_radius=32,hover_color="purple4")
+boton_ver_vuelos = ctk.CTkButton(frame_botones, text="Vuelos disponibles",fg_color="purple",border_color="black",border_width=2,corner_radius=32,hover_color="purple4")
 
 #posicion de los elementos
 label_titulo.place(x=400, y=20)
@@ -178,6 +193,7 @@ boton_registro.place(x=80, y=70)
 boton_comprar.place(x=80, y=140)
 boton_checkin.place(x=80, y=210)
 boton_ver_vuelos.place(x=80, y=280)
+
 
 
 ventana_inicio.mainloop()
