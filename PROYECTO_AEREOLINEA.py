@@ -7,43 +7,97 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import datetime as dt
 import csv
-
+import random as rd
 ctk.set_appearance_mode("light")
 
 
+def condicion_inicio_sesion(entry_codigo_u,codigos_usuarios,ventana_inicio_sesion,nombre_usuario):
+    codigo= entry_codigo_u.get()
+    if codigo=="":
+        messagebox.showerror("Error","Por favor ingrese un codigo de inicio de sesion")
+        return
+    with open("datos_usuarios.csv", "r") as f:
+        reader = csv.reader(f)
+        for row in reader:
+            if row and len(row) >= 10 and row[9] == codigo:
+                messagebox.showinfo("Informacion","Inicio de sesion exitoso")
+                nombre_usuario=row[0]
+                comprar_tiquete(ventana_inicio_sesion,nombre_usuario)
+                return nombre_usuario
+                
+    messagebox.showerror("Error", "El código de inicio de sesión no es válido")
+                
+    
+        
 
 
-def comprar_tiquete():
+
+
+def ventana_inicio_sesion(ventana_inicio,codigos_usuarios,nombre_usuario):
     ventana_inicio.destroy()
+    ventana_inicio_sesion = ctk.CTk()
+    ventana_inicio_sesion.title("Inicio de sesion")
+    ventana_inicio_sesion.geometry("500x500+250+80")
+    
+    label_titulo = ctk.CTkLabel(ventana_inicio_sesion, text="Inicio de sesion", font=("Arial", 20))
+    label_codigo = ctk.CTkLabel(ventana_inicio_sesion, text="Codigo de inicio de sesion:", font=("Arial", 15))
+    entry_codigo_u = ctk.CTkEntry(ventana_inicio_sesion, font=("Arial", 15),border_color="purple")
+    boton_iniciar_sesion= ctk.CTkButton(ventana_inicio_sesion,text="Iniciar Sesion", font=("arial",15),fg_color="purple",corner_radius=32,command= lambda: condicion_inicio_sesion(entry_codigo_u,codigos_usuarios,ventana_inicio_sesion,nombre_usuario))
+    
+    label_titulo.place(relx=0.5, rely=0.1, anchor="center")
+    label_codigo.place(relx=0.5, rely=0.3, anchor="center")
+    entry_codigo_u.place(relx=0.5, rely=0.4, anchor="center")
+    boton_iniciar_sesion.place(relx=0.5,rely=0.5,anchor= "center")
+    
+    ventana_inicio_sesion.mainloop()
+
+
+
+
+
+def comprar_tiquete(ventana_inicio_sesion,nombre_usuario):
+    ventana_inicio_sesion.destroy()
     ventana_compra = ctk.CTk()
     ventana_compra.title("Compra de tiquetes")
-    ventana_compra.geometry("500x500+250+80")
+    ventana_compra.geometry("1800x800+0+0")
     
-    label_titulo = ctk.CTkLabel(ventana_compra, text="Comprar Ticket", font=("Arial", 20))
-    label_origen = ctk.CTkLabel(ventana_compra, text="Origen:", font=("Arial", 15))
-    lugares_origuen= ctk.CTkComboBox(ventana_compra, values=["Bogota", "Medellin", "Cali", "Barranquilla", "Cartagena", "Santa Marta", "San Andres", "Leticia", "Bucaramanga", "Pereira", "Armenia", "Manizales", "Cucuta", "Pasto", "Popayan", "Neiva", "Villavicencio", "Monteria", "Riohacha", "Valledupar", "Tunja", "Yopal" ], font=("Arial", 15),border_color="purple")
-    label_destino = ctk.CTkLabel(ventana_compra, text="Destino:", font=("Arial", 15))
-    lugares_destino= ctk.CTkComboBox(ventana_compra, values=["Bogota", "Medellin", "Cali", "Barranquilla", "Cartagena", "Santa Marta", "San Andres", "Leticia", "Bucaramanga", "Pereira", "Armenia", "Manizales", "Cucuta", "Pasto", "Popayan", "Neiva", "Villavicencio", "Monteria", "Riohacha", "Valledupar", "Tunja", "Yopal" ], font=("Arial", 15),border_color="purple")
-    label_fecha_salida = ctk.CTkLabel(ventana_compra, text="Fecha de salida:", font=("Arial", 15))
-    entry_fecha_salida = ctk.CTkEntry(ventana_compra, font=("Arial", 15),border_color="purple")
-    label_fecha_regreso = ctk.CTkLabel(ventana_compra, text="Fecha de regreso:", font=("Arial", 15))
-    entry_fecha_regreso = ctk.CTkEntry(ventana_compra, font=("Arial", 15),border_color="purple")
-    label_numero_pasajeros = ctk.CTkLabel(ventana_compra, text="Numero de pasajeros:", font=("Arial", 15))
-    entry_numero_pasajeros = ctk.CTkEntry(ventana_compra, font=("Arial", 15),border_color="purple")
+    #se crea un frame para los botones
+    frame_botones = ctk.CTkFrame(ventana_compra,fg_color="white",corner_radius=32,width=900, height=250, border_color="purple",border_width=3)
+    frame_botones.place(x=300, y=150)
+    
+    label_nombre_usuario = ctk.CTkLabel(ventana_compra, text="Bienvenid@, "+nombre_usuario ,font=("Arial", 20),text_color="purple")
+    label_titulo = ctk.CTkLabel(ventana_compra, text="Stellar Airways", font=("Arial", 20),text_color="purple")
+    labelsubtitulo = ctk.CTkLabel(ventana_compra, text="Compra de tickets", font=("Arial", 15))
+    label_texto = ctk.CTkLabel(ventana_compra, text="Empieza a buscar las mejores opciones:", font=("Arial", 20))
+    label_origen = ctk.CTkLabel(frame_botones, text="Origen:", font=("Arial", 15))
+    lugares_origuen= ctk.CTkComboBox(frame_botones, values=["Bogota", "Medellin", "Cali", "Barranquilla", "Cartagena", "Santa Marta", "San Andres", "Leticia", "Bucaramanga", "Pereira", "Armenia", "Manizales", "Cucuta", "Pasto", "Popayan", "Neiva", "Villavicencio", "Monteria", "Riohacha", "Valledupar", "Tunja", "Yopal" ], font=("Arial", 15),border_color="purple")
+    label_destino = ctk.CTkLabel(frame_botones, text="Destino:", font=("Arial", 15))
+    lugares_destino= ctk.CTkComboBox(frame_botones, values=["Bogota", "Medellin", "Cali", "Barranquilla", "Cartagena", "Santa Marta", "San Andres", "Leticia", "Bucaramanga", "Pereira", "Armenia", "Manizales", "Cucuta", "Pasto", "Popayan", "Neiva", "Villavicencio", "Monteria", "Riohacha", "Valledupar", "Tunja", "Yopal" ], font=("Arial", 15),border_color="purple")
+    label_fecha_salida = ctk.CTkLabel(frame_botones, text="Fecha de salida:", font=("Arial", 15))
+    entry_fecha_salida = ctk.CTkEntry(frame_botones, font=("Arial", 15),border_color="purple")
+    label_fecha_regreso = ctk.CTkLabel(frame_botones, text="Fecha de regreso:", font=("Arial", 15))
+    entry_fecha_regreso = ctk.CTkEntry(frame_botones, font=("Arial", 15),border_color="purple")
+    label_numero_pasajeros = ctk.CTkLabel(frame_botones, text="Numero de pasajeros:", font=("Arial", 15))
+    entry_numero_pasajeros = ctk.CTkEntry(frame_botones, font=("Arial", 15),border_color="purple")
     boton_buscar= ctk.CTkButton(ventana_compra,text="Buscar Vuelo", font=("arial",15),fg_color="purple",corner_radius=32 )
 
-    label_titulo.place(relx=0.5, rely=0.1, anchor="center")
-    label_origen.place(relx=0.1, rely=0.3, anchor="center")
-    lugares_origuen.place(relx=0.3, rely=0.3, anchor="center")
-    label_destino.place(relx=0.6, rely=0.3, anchor="center")
-    lugares_destino.place(relx=0.9, rely=0.3, anchor="center")
-    label_fecha_salida.place(relx=0.1, rely=0.4, anchor="center")
-    entry_fecha_salida.place(relx=0.3, rely=0.4, anchor="center")
-    label_fecha_regreso.place(relx=0.6, rely=0.4, anchor="center")
-    entry_fecha_regreso.place(relx=0.9, rely=0.4, anchor="center")
-    label_numero_pasajeros.place(relx=0.5, rely=0.5, anchor="center")
-    entry_numero_pasajeros.place(relx=0.5, rely=0.6, anchor="center")
-    boton_buscar.place(relx=0.5,rely=0.7,anchor= "center")
+    
+    label_nombre_usuario.place(x=30, y=30)
+    label_titulo.place(relx=0.5, rely=0.05, anchor="center")
+    labelsubtitulo.place(relx=0.5, rely=0.1, anchor="center")
+    label_texto.place(relx=0.5, rely=0.15, anchor="center")
+    label_origen.place(x=140, y=50)
+    lugares_origuen.place(x=240, y=50)
+    label_destino.place(x=540, y=50)
+    lugares_destino.place(x=640, y=50)
+    label_fecha_salida.place(x=120, y=100)
+    entry_fecha_salida.place(x=240, y=100)
+    label_fecha_regreso.place(x=500, y=100)
+    entry_fecha_regreso.place(x=640, y=100)
+    label_numero_pasajeros.place(x=370, y=150)
+    entry_numero_pasajeros.place(x=380, y=183)
+    
+    boton_buscar.place(x=680, y=400)
     
     ventana_compra.mainloop()
     
@@ -76,7 +130,7 @@ def condiciones_registro(ventana_registro, entry_nombre, entry_apellido, combo_g
         messagebox.showerror("Error","Por favor ingrese datos válidos")
         
     guardar_datos(entry_nombre, entry_apellido, combo_genero, entry_nacionalidad, entry_documento, entry_fecha_nacimiento, entry_correo, entry_numero_telefono,valor_seleccionado)
-  
+
 
 def guardar_datos(entry_nombre, entry_apellido, combo_genero, entry_nacionalidad, entry_documento, entry_fecha_nacimiento, entry_correo, entry_numero_telefono,valor_seleccionado):
     documento = entry_documento.get()
@@ -88,16 +142,17 @@ def guardar_datos(entry_nombre, entry_apellido, combo_genero, entry_nacionalidad
             if row and len(row) >= 5 and row[4] == documento:  # Si el documento ya existe, mostrar un mensaje de error y salir de la función
                 messagebox.showerror("Error", "El documento ya existe en la base de datos")
                 return
-            
-    messagebox.showinfo("informacion","Datos guardados exitosamente")
+
+    codigos_usuarios= rd.randint(1000,9999)
+    messagebox.showinfo("informacion","Datos guardados exitosamente, su codigo de inicio de sesion es: "+str(codigos_usuarios))
     
     # Si el documento no existe, agregar el nuevo registro
     with open("datos_usuarios.csv", "a") as f:
-        f.write(f"\n{entry_nombre.get()},{entry_apellido.get()},{combo_genero.get()},{entry_nacionalidad.get()},{documento},{entry_fecha_nacimiento.get()},{entry_correo.get()},{entry_numero_telefono.get()},{valor_seleccionado.get()}\n")
+        f.write(f"\n{entry_nombre.get()},{entry_apellido.get()},{combo_genero.get()},{entry_nacionalidad.get()},{documento},{entry_fecha_nacimiento.get()},{entry_correo.get()},{entry_numero_telefono.get()},{valor_seleccionado.get()},{codigos_usuarios}\n")
+
 
     
-    
-def ventanaregistro():
+def ventanaregistro(ventana_inicio):
     ventana_inicio.destroy()
     ventana_registro = ctk.CTk()
     ventana_registro.title("Registro")
@@ -175,40 +230,41 @@ def ventanaregistro():
 
 
 
+def main(codigos_usuarios,nombre_usuario):
 
+    ventana_inicio = ctk.CTk()
+    ventana_inicio.title("Aerolinea Stellar Airways")
+    ventana_inicio.geometry("700x500+500+220")
 
-ventana_inicio = ctk.CTk()
-ventana_inicio.title("Aerolinea Stellar Airways")
-ventana_inicio.geometry("700x500+500+220")
+    label_titulo = ctk.CTkLabel(ventana_inicio, text="Stellar Airways", font=("Eras Demi ITC", 30),text_color="purple")
 
-label_titulo = ctk.CTkLabel(ventana_inicio, text="Stellar Airways", font=("Eras Demi ITC", 30),text_color="purple")
+    #se colocal la imagen del logo
+    label_logo= Image.open("logoNuevo.png")
+    label_logo=label_logo.resize((410,625))
+    photo=ImageTk.PhotoImage(label_logo)
+    label_logo=tk.Label(ventana_inicio, image=photo)
+    label_logo.image=photo
 
-#se colocal la imagen del logo
-label_logo= Image.open("logoNuevo.png")
-label_logo=label_logo.resize((410,625))
-photo=ImageTk.PhotoImage(label_logo)
-label_logo=tk.Label(ventana_inicio, image=photo)
-label_logo.image=photo
+    #se crea un frame para los botones
+    frame_botones = ctk.CTkFrame(ventana_inicio,fg_color="white",corner_radius=32,width=300, height=400, border_color="purple",border_width=3)
+    frame_botones.place(x=360, y=70)
 
-#se crea un frame para los botones
-frame_botones = ctk.CTkFrame(ventana_inicio,fg_color="white",corner_radius=32,width=300, height=400, border_color="purple",border_width=3)
-frame_botones.place(x=360, y=70)
+    #se crean los botones
+    boton_registro = ctk.CTkButton(frame_botones, text="Registro",fg_color="purple" ,border_color="black",border_width=2,corner_radius=32,hover_color="purple4",command= lambda: ventanaregistro(ventana_inicio))
+    boton_comprar = ctk.CTkButton(frame_botones, text="Comprar tiquete",fg_color="purple",border_color="black",border_width=2,corner_radius=32,hover_color="purple4",command= lambda:ventana_inicio_sesion(ventana_inicio,codigos_usuarios,nombre_usuario))
+    boton_checkin = ctk.CTkButton(frame_botones, text="Realizar Check-in",fg_color="purple",border_color="black",border_width=2,corner_radius=32,hover_color="purple4")
+    boton_ver_vuelos = ctk.CTkButton(frame_botones, text="Vuelos disponibles",fg_color="purple",border_color="black",border_width=2,corner_radius=32,hover_color="purple4")
 
+    #posicion de los elementos
+    label_titulo.place(x=400, y=20)
+    label_logo.place(x=0, y=0)
+    boton_registro.place(x=80, y=70)
+    boton_comprar.place(x=80, y=140)
+    boton_checkin.place(x=80, y=210)
+    boton_ver_vuelos.place(x=80, y=280)
 
-#se crean los botones
-boton_registro = ctk.CTkButton(frame_botones, text="Registro",fg_color="purple" ,border_color="black",border_width=2,corner_radius=32,hover_color="purple4",command=ventanaregistro)
-boton_comprar = ctk.CTkButton(frame_botones, text="Comprar tiquete",fg_color="purple",border_color="black",border_width=2,corner_radius=32,hover_color="purple4",command=comprar_tiquete)
-boton_checkin = ctk.CTkButton(frame_botones, text="Realizar Check-in",fg_color="purple",border_color="black",border_width=2,corner_radius=32,hover_color="purple4")
-boton_ver_vuelos = ctk.CTkButton(frame_botones, text="Vuelos disponibles",fg_color="purple",border_color="black",border_width=2,corner_radius=32,hover_color="purple4")
+    ventana_inicio.mainloop()
 
-#posicion de los elementos
-label_titulo.place(x=400, y=20)
-label_logo.place(x=0, y=0)
-boton_registro.place(x=80, y=70)
-boton_comprar.place(x=80, y=140)
-boton_checkin.place(x=80, y=210)
-boton_ver_vuelos.place(x=80, y=280)
-
-
-
-ventana_inicio.mainloop()
+if __name__ == "__main__":
+    codigos_usuarios = []  
+    main(codigos_usuarios,nombre_usuario="")

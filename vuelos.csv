@@ -1,0 +1,66 @@
+Hora_Salida,Origen,Hora_Llegada,Destino,Precio,Servicio
+08:00,Bogotá,10:00,Medellín,150000,Aluminio
+09:00,Medellín,11:00,Cali,160000,Diamante
+10:00,Cali,12:00,Barranquilla,170000,Premium
+11:00,Barranquilla,13:00,Cartagena,180000,Aluminio
+12:00,Cartagena,14:00,Santa Marta,190000,Diamante
+13:00,Santa Marta,15:00,San Andres,200000,Premium
+14:00,San Andres,16:00,Leticia,210000,Aluminio
+15:00,Leticia,17:00,Bucaramanga,220000,Diamante
+16:00,Bucaramanga,18:00,Pereira,230000,Premium
+17:00,Pereira,19:00,Armenia,240000,Aluminio
+18:00,Armenia,20:00,Manizales,250000,Diamante
+19:00,Manizales,21:00,Cucuta,260000,Premium
+20:00,Cucuta,22:00,Pasto,270000,Aluminio
+21:00,Pasto,23:00,Popayan,280000,Diamante
+22:00,Popayan,00:00,Neiva,290000,Premium
+08:00,Neiva,10:00,Villavicencio,150000,Aluminio
+09:00,Villavicencio,11:00,Monteria,160000,Diamante
+10:00,Monteria,12:00,Riohacha,170000,Premium
+11:00,Riohacha,13:00,Valledupar,180000,Aluminio
+12:00,Valledupar,14:00,Tunja,190000,Diamante
+13:00,Tunja,15:00,Yopal,200000,Premium
+14:00,Yopal,16:00,Bogotá,210000,Aluminio
+15:00,Medellín,17:00,Leticia,220000,Diamante
+16:00,Cali,18:00,San Andres,230000,Premium
+17:00,Barranquilla,19:00,Santa Marta,240000,Aluminio
+18:00,Cartagena,20:00,Bucaramanga,250000,Diamante
+19:00,Santa Marta,21:00,Pereira,260000,Premium
+20:00,San Andres,22:00,Armenia,270000,Aluminio
+21:00,Leticia,23:00,Manizales,280000,Diamante
+22:00,Bucaramanga,00:00,Cucuta,290000,Premium
+08:00,Pereira,10:00,Pasto,150000,Aluminio
+09:00,Armenia,11:00,Popayan,160000,Diamante
+10:00,Manizales,12:00,Neiva,170000,Premium
+11:00,Cucuta,13:00,Villavicencio,180000,Aluminio
+12:00,Pasto,14:00,Monteria,190000,Diamante
+13:00,Popayan,15:00,Riohacha,200000,Premium
+14:00,Neiva,16:00,Valledupar,210000,Aluminio
+15:00,Villavicencio,17:00,Tunja,220000,Diamante
+16:00,Monteria,18:00,Yopal,230000,Premium
+17:00,Riohacha,19:00,Bogotá,240000,Aluminio
+18:00,Valledupar,20:00,Medellín,250000,Diamante
+19:00,Tunja,21:00,Cali,260000,Premium
+20:00,Yopal,22:00,Barranquilla,270000,Aluminio
+21:00,Bogotá,23:00,Cartagena,280000,Diamante
+22:00,Medellín,00:00,Santa Marta,290000,Premium
+08:00,Cali,10:00,San Andres,150000,Aluminio
+09:00,Barranquilla,11:00,Leticia,160000,Diamante
+10:00,Cartagena,12:00,Bucaramanga,170000,Premium
+11:00,Santa Marta,13:00,Pereira,180000,Aluminio
+12:00,San Andres,14:00,Armenia,190000,Diamante
+13:00,Leticia,15:00,Manizales,200000,Premium
+14:00,Bucaramanga,16:00,Cucuta,210000,Aluminio
+15:00,Pereira,17:00,Pasto,220000,Diamante
+16:00,Armenia,18:00,Popayan,230000,Premium
+17:00,Manizales,19:00,Neiva,240000,Aluminio
+18:00,Cucuta,20:00,Villavicencio,250000,Diamante
+19:00,Pasto,21:00,Monteria,260000,Premium
+20:00,Popayan,22:00,Riohacha,270000,Aluminio
+21:00,Neiva,23:00,Valledupar,280000,Diamante
+22:00,Villavicencio,00:00,Tunja,290000,Premium
+08:00,Monteria,10:00,Yopal,150000,Aluminio
+09:00,Riohacha,11:00,Bogotá,160000,Diamante
+10:00,Valledupar,12:00,Medellín,170000,Premium
+11:00,Tunja,13:00,Cali,180000,Aluminio
+12:00,Yopal,14:00,Barranquilla,190000,Diamante
