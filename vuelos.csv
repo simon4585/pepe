@@ -1,6 +1,6 @@
-Hora_Salida,Origen,Hora_Llegada,Destino,Precio,Servicio
-08:00,Bogotá,10:00,Medellín,150000,Aluminio
-09:00,Medellín,11:00,Cali,160000,Diamante
+Hora_Salida,origen,Hora_Llegada,Destino,Precio,Servicio
+08:00,Bogota,10:00,Medellin,150000,Aluminio
+09:00,Medellin,11:00,Cali,160000,Diamante
 10:00,Cali,12:00,Barranquilla,170000,Premium
 11:00,Barranquilla,13:00,Cartagena,180000,Aluminio
 12:00,Cartagena,14:00,Santa Marta,190000,Diamante
@@ -20,8 +20,8 @@ Hora_Salida,Origen,Hora_Llegada,Destino,Precio,Servicio
 11:00,Riohacha,13:00,Valledupar,180000,Aluminio
 12:00,Valledupar,14:00,Tunja,190000,Diamante
 13:00,Tunja,15:00,Yopal,200000,Premium
-14:00,Yopal,16:00,Bogotá,210000,Aluminio
-15:00,Medellín,17:00,Leticia,220000,Diamante
+14:00,Yopal,16:00,Bogota,210000,Aluminio
+15:00,Medellin,17:00,Leticia,220000,Diamante
 16:00,Cali,18:00,San Andres,230000,Premium
 17:00,Barranquilla,19:00,Santa Marta,240000,Aluminio
 18:00,Cartagena,20:00,Bucaramanga,250000,Diamante
@@ -38,12 +38,12 @@ Hora_Salida,Origen,Hora_Llegada,Destino,Precio,Servicio
 14:00,Neiva,16:00,Valledupar,210000,Aluminio
 15:00,Villavicencio,17:00,Tunja,220000,Diamante
 16:00,Monteria,18:00,Yopal,230000,Premium
-17:00,Riohacha,19:00,Bogotá,240000,Aluminio
+17:00,Riohacha,19:00,Bogota,240000,Aluminio
 18:00,Valledupar,20:00,Medellín,250000,Diamante
 19:00,Tunja,21:00,Cali,260000,Premium
 20:00,Yopal,22:00,Barranquilla,270000,Aluminio
-21:00,Bogotá,23:00,Cartagena,280000,Diamante
-22:00,Medellín,00:00,Santa Marta,290000,Premium
+21:00,Bogota,23:00,Cartagena,280000,Diamante
+22:00,Medellin,00:00,Santa Marta,290000,Premium
 08:00,Cali,10:00,San Andres,150000,Aluminio
 09:00,Barranquilla,11:00,Leticia,160000,Diamante
 10:00,Cartagena,12:00,Bucaramanga,170000,Premium
@@ -60,7 +60,7 @@ Hora_Salida,Origen,Hora_Llegada,Destino,Precio,Servicio
 21:00,Neiva,23:00,Valledupar,280000,Diamante
 22:00,Villavicencio,00:00,Tunja,290000,Premium
 08:00,Monteria,10:00,Yopal,150000,Aluminio
-09:00,Riohacha,11:00,Bogotá,160000,Diamante
-10:00,Valledupar,12:00,Medellín,170000,Premium
+09:00,Riohacha,11:00,Bogota,160000,Diamante
+10:00,Valledupar,12:00,Medellin,170000,Premium
 11:00,Tunja,13:00,Cali,180000,Aluminio
 12:00,Yopal,14:00,Barranquilla,190000,Diamante

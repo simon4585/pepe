@@ -11,6 +11,19 @@ import random as rd
 ctk.set_appearance_mode("light")
 
 
+def vuelos_recomendados(ventana_compra):
+    y= 510
+    with open("vuelos.csv", "r") as f:
+        reader = csv.reader(f)
+        for row in reader:
+            if row:
+                frame_vuelos = ctk.CTkFrame(ventana_compra,fg_color="white",corner_radius=32,width=800, height=100, border_color="purple",border_width=3)
+                frame_vuelos.place(x=350, y=y)
+                vuelos= ctk.CTkLabel(frame_vuelos, text=row, font=("Arial", 15))
+                vuelos.place(x=50, y=50)
+                y += 100 
+
+
 def condicion_inicio_sesion(entry_codigo_u,codigos_usuarios,ventana_inicio_sesion,nombre_usuario):
     codigo= entry_codigo_u.get()
     if codigo=="":
@@ -42,7 +55,7 @@ def ventana_inicio_sesion(ventana_inicio,codigos_usuarios,nombre_usuario):
     label_titulo = ctk.CTkLabel(ventana_inicio_sesion, text="Inicio de sesion", font=("Arial", 20))
     label_codigo = ctk.CTkLabel(ventana_inicio_sesion, text="Codigo de inicio de sesion:", font=("Arial", 15))
     entry_codigo_u = ctk.CTkEntry(ventana_inicio_sesion, font=("Arial", 15),border_color="purple")
-    boton_iniciar_sesion= ctk.CTkButton(ventana_inicio_sesion,text="Iniciar Sesion", font=("arial",15),fg_color="purple",corner_radius=32,command= lambda: condicion_inicio_sesion(entry_codigo_u,codigos_usuarios,ventana_inicio_sesion,nombre_usuario))
+    boton_iniciar_sesion= ctk.CTkButton(ventana_inicio_sesion,text="Iniciar Sesion", font=("arial",15),fg_color="purple",corner_radius=32,hover_color="purple4",command= lambda: condicion_inicio_sesion(entry_codigo_u,codigos_usuarios,ventana_inicio_sesion,nombre_usuario))
     
     label_titulo.place(relx=0.5, rely=0.1, anchor="center")
     label_codigo.place(relx=0.5, rely=0.3, anchor="center")
@@ -66,20 +79,20 @@ def comprar_tiquete(ventana_inicio_sesion,nombre_usuario):
     frame_botones.place(x=300, y=150)
     
     label_nombre_usuario = ctk.CTkLabel(ventana_compra, text="Bienvenid@, "+nombre_usuario ,font=("Arial", 20),text_color="purple")
-    label_titulo = ctk.CTkLabel(ventana_compra, text="Stellar Airways", font=("Arial", 20),text_color="purple")
+    label_titulo = ctk.CTkLabel(ventana_compra, text="Stellar Airways", font=("ERAS DEMIS ITC", 20),text_color="purple")
     labelsubtitulo = ctk.CTkLabel(ventana_compra, text="Compra de tickets", font=("Arial", 15))
     label_texto = ctk.CTkLabel(ventana_compra, text="Empieza a buscar las mejores opciones:", font=("Arial", 20))
     label_origen = ctk.CTkLabel(frame_botones, text="Origen:", font=("Arial", 15))
-    lugares_origuen= ctk.CTkComboBox(frame_botones, values=["Bogota", "Medellin", "Cali", "Barranquilla", "Cartagena", "Santa Marta", "San Andres", "Leticia", "Bucaramanga", "Pereira", "Armenia", "Manizales", "Cucuta", "Pasto", "Popayan", "Neiva", "Villavicencio", "Monteria", "Riohacha", "Valledupar", "Tunja", "Yopal" ], font=("Arial", 15),border_color="purple")
+    lugares_origuen= ctk.CTkComboBox(frame_botones, values=["Bogota", "Medellin", "Cali", "Barranquilla", "Cartagena", "Santa Marta", "San Andres", "Leticia", "Bucaramanga", "Pereira", "Armenia", "Manizales", "Cucuta", "Pasto", "Popayan", "Neiva", "Villavicencio", "Monteria", "Riohacha", "Valledupar", "Tunja", "Yopal" ], font=("Arial", 15),border_color="purple",button_color="purple",button_hover_color="purple4")
     label_destino = ctk.CTkLabel(frame_botones, text="Destino:", font=("Arial", 15))
-    lugares_destino= ctk.CTkComboBox(frame_botones, values=["Bogota", "Medellin", "Cali", "Barranquilla", "Cartagena", "Santa Marta", "San Andres", "Leticia", "Bucaramanga", "Pereira", "Armenia", "Manizales", "Cucuta", "Pasto", "Popayan", "Neiva", "Villavicencio", "Monteria", "Riohacha", "Valledupar", "Tunja", "Yopal" ], font=("Arial", 15),border_color="purple")
+    lugares_destino= ctk.CTkComboBox(frame_botones, values=["Bogota", "Medellin", "Cali", "Barranquilla", "Cartagena", "Santa Marta", "San Andres", "Leticia", "Bucaramanga", "Pereira", "Armenia", "Manizales", "Cucuta", "Pasto", "Popayan", "Neiva", "Villavicencio", "Monteria", "Riohacha", "Valledupar", "Tunja", "Yopal" ], font=("Arial", 15),border_color="purple",button_color="purple",button_hover_color="purple4")
     label_fecha_salida = ctk.CTkLabel(frame_botones, text="Fecha de salida:", font=("Arial", 15))
     entry_fecha_salida = ctk.CTkEntry(frame_botones, font=("Arial", 15),border_color="purple")
     label_fecha_regreso = ctk.CTkLabel(frame_botones, text="Fecha de regreso:", font=("Arial", 15))
     entry_fecha_regreso = ctk.CTkEntry(frame_botones, font=("Arial", 15),border_color="purple")
     label_numero_pasajeros = ctk.CTkLabel(frame_botones, text="Numero de pasajeros:", font=("Arial", 15))
     entry_numero_pasajeros = ctk.CTkEntry(frame_botones, font=("Arial", 15),border_color="purple")
-    boton_buscar= ctk.CTkButton(ventana_compra,text="Buscar Vuelo", font=("arial",15),fg_color="purple",corner_radius=32 )
+    boton_buscar= ctk.CTkButton(ventana_compra,text="Buscar Vuelo", font=("arial",15),fg_color="purple",corner_radius=32,hover_color="purple4",command= lambda: vuelos_recomendados(ventana_compra))
 
     
     label_nombre_usuario.place(x=30, y=30)
@@ -98,7 +111,8 @@ def comprar_tiquete(ventana_inicio_sesion,nombre_usuario):
     entry_numero_pasajeros.place(x=380, y=183)
     
     boton_buscar.place(x=680, y=400)
-    
+
+    vuelos_recomendados(ventana_compra)
     ventana_compra.mainloop()
     
     
