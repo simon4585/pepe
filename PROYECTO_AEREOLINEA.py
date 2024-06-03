@@ -11,17 +11,63 @@ import random as rd
 ctk.set_appearance_mode("light")
 
 
-def vuelos_recomendados(ventana_compra):
-    y= 510
+
+
+def filtrar_vuelos(ventana_compra, origen, destino, fecha_salida, fecha_regreso, numero_pasajeros):
+    y = 20
+    canvas = ventana_compra.winfo_children()[-2]  # Obtiene el canvas
+    frame_vuelos = canvas.winfo_children()[0]  # Obtiene el frame dentro del canvas
+
+    # Limpia el frame antes de agregar nuevos vuelos
+    for widget in frame_vuelos.winfo_children():
+        widget.destroy()
+
     with open("vuelos.csv", "r") as f:
         reader = csv.reader(f)
+        next(reader)  # Saltar la cabecera
+        for row in reader:
+            if row and row[1] == origen and row[3] == destino:
+                frame_vuelo = ctk.CTkFrame(frame_vuelos, fg_color="white", corner_radius=32, width=1100, height=100, border_color="purple", border_width=3)
+                frame_vuelo.place(x=20, y=y)
+                vuelos = ctk.CTkLabel(frame_vuelo, text=" | ".join(row), font=("Arial", 15), text_color="black")
+                vuelos.place(x=50, y=20)
+                y += 120
+    
+    # Ajustar el tamaño del frame interno al contenido
+    frame_vuelos.configure(height=y)
+    canvas.configure(scrollregion=canvas.bbox("all"))
+
+
+
+def vuelos_recomendados(ventana_compra):
+    y = 20
+    canvas = ventana_compra.winfo_children()[-2]  # Obtiene el canvas
+    frame_vuelos = canvas.winfo_children()[0]  # Obtiene el frame dentro del canvas
+
+    # Limpia el frame antes de agregar nuevos vuelos
+    for widget in frame_vuelos.winfo_children():
+        widget.destroy()
+
+    with open("vuelos.csv", "r") as f:
+        reader = csv.reader(f)
+        next(reader)  # Saltar la cabecera
         for row in reader:
             if row:
-                frame_vuelos = ctk.CTkFrame(ventana_compra,fg_color="white",corner_radius=32,width=800, height=100, border_color="purple",border_width=3)
-                frame_vuelos.place(x=350, y=y)
-                vuelos= ctk.CTkLabel(frame_vuelos, text=row, font=("Arial", 15))
-                vuelos.place(x=50, y=50)
-                y += 100 
+                frame_vuelo = ctk.CTkFrame(frame_vuelos, fg_color="white", corner_radius=32, width=1100, height=100, border_color="purple", border_width=3)
+                frame_vuelo.place(x=20, y=y)
+                vuelos = ctk.CTkLabel(frame_vuelo, text=" | ".join(row), font=("Arial", 15), text_color="black")
+                vuelos.place(x=50, y=20)
+                y += 120
+    
+    # Ajustar el tamaño del frame interno al contenido
+    frame_vuelos.configure(height=y)
+    canvas.configure(scrollregion=canvas.bbox("all"))
+
+
+
+
+
+
 
 
 def condicion_inicio_sesion(entry_codigo_u,codigos_usuarios,ventana_inicio_sesion,nombre_usuario):
@@ -92,7 +138,7 @@ def comprar_tiquete(ventana_inicio_sesion,nombre_usuario):
     entry_fecha_regreso = ctk.CTkEntry(frame_botones, font=("Arial", 15),border_color="purple")
     label_numero_pasajeros = ctk.CTkLabel(frame_botones, text="Numero de pasajeros:", font=("Arial", 15))
     entry_numero_pasajeros = ctk.CTkEntry(frame_botones, font=("Arial", 15),border_color="purple")
-    boton_buscar= ctk.CTkButton(ventana_compra,text="Buscar Vuelo", font=("arial",15),fg_color="purple",corner_radius=32,hover_color="purple4",command= lambda: vuelos_recomendados(ventana_compra))
+    boton_buscar= ctk.CTkButton(ventana_compra,text="Buscar Vuelo", font=("arial",15),fg_color="purple",corner_radius=32,hover_color="purple4",command= lambda: filtrar_vuelos(ventana_compra, lugares_origuen.get(), lugares_destino.get(), entry_fecha_salida.get(), entry_fecha_regreso.get(), entry_numero_pasajeros.get()))
 
     
     label_nombre_usuario.place(x=30, y=30)
@@ -112,7 +158,17 @@ def comprar_tiquete(ventana_inicio_sesion,nombre_usuario):
     
     boton_buscar.place(x=680, y=400)
 
-    vuelos_recomendados(ventana_compra)
+    # Crear canvas y scrollbar para mostrar vuelos
+    canvas = ctk.CTkCanvas(ventana_compra, width=1500, height=300)
+    scrollbar = ctk.CTkScrollbar(ventana_compra, orientation="vertical", command=canvas.yview, width=20, height=300)
+    frame_vuelos = ctk.CTkFrame(canvas, fg_color="white", corner_radius=32, width=1200, height=1000, border_color="purple", border_width=3)
+
+    canvas.configure(yscrollcommand=scrollbar.set)
+    canvas.create_window((0, 0), window=frame_vuelos, anchor="nw")
+    
+    canvas.place(x=50, y=650)
+    scrollbar.place(x=1450, y=550)
+    
     ventana_compra.mainloop()
     
     
@@ -236,11 +292,6 @@ def ventanaregistro(ventana_inicio):
     boton_enviar.place(x=640,y=470)
     
     ventana_registro.mainloop()
-
-
-
-
-
 
 
 
